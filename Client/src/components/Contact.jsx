@@ -10,7 +10,10 @@ function Contact({ listing }) {
   useEffect(() => {
     const getLandLord = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/users/${listing.userRef}`);
+        const res = await fetch(
+          `${API_BASE_URL}/api/users/${listing.userRef}`,
+          { credentials: "include" }
+        );
 
         const data = await res.json();
         if (data.success === false) {
