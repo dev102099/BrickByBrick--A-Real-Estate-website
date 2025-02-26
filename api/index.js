@@ -5,9 +5,18 @@ const listRoute = require("./routes/listing.route");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
 dotenv.config();
 
 const app = express();
+app.use(
+  cors({
+    origin: "https://brickbybrick-a-real-estate-website-1.onrender.com", // Frontend URL
+    credentials: true,
+  })
+);
+
 app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 
