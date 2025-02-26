@@ -66,14 +66,13 @@ export default function Profile() {
       ...formData,
       [e.target.id]: e.target.value,
     });
-    console.log(formData);
   };
 
   const handleUpdate = async () => {
     try {
       dispatch(onUpdateStart());
       const res = await fetch(`/api/users/update/${currentUser._id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
