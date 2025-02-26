@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3000", // Your backend server
+        target: "https://brickbybrick-a-real-estate-website.onrender.com", // Your backend server
         changeOrigin: true,
       },
     },
