@@ -71,13 +71,16 @@ export default function Profile() {
   const handleUpdate = async () => {
     try {
       dispatch(onUpdateStart());
-      const res = await fetch(`/api/users/update/${currentUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${API_BASE_URL}/api/users/update/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (data.success == false) {
         dispatch(onUpdateFailure(data.message));
