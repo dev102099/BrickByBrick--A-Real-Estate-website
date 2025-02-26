@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 
 dotenv.config();
 
@@ -38,6 +39,10 @@ app.listen(3000, () => {
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/listing", listRoute);
+app.use(express.static(path.join(__dirname, "Client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server error";
