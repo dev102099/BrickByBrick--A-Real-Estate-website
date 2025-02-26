@@ -13,7 +13,8 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "https://brickbybrick-a-real-estate-website-1.onrender.com", // Frontend URL
+    origin: "https://brickbybrick-a-real-estate-website-1.onrender.com",
+    credentials: true,
   })
 );
 
