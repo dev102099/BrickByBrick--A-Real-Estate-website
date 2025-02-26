@@ -9,6 +9,8 @@ const test = (req, res) => {
 
 const updateUser = async (req, res, next) => {
   try {
+    console.log("Received ID:", req.params.id);
+    console.log("Received Payload:", req.body);
     if (req.body.password) {
       req.body.password = bcrypt.hashSync(req.body.password, 10);
     }
