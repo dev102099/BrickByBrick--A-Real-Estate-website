@@ -70,6 +70,7 @@ const signin = async (req, res, next) => {
       return next(handleError(401, "Wrong credentials"));
     }
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_ACCESS_TOKEN);
+    console.log("✅ JWT Token Created:", token);
     const { password: notNeeded, ...restData } = validUser._doc;
     res
       .cookie("access_token", token, {
