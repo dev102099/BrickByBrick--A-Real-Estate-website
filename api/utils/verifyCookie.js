@@ -2,6 +2,7 @@ const handleError = require("../middleware/error");
 const jwt = require("jsonwebtoken");
 
 const verifyCookie = (req, res, next) => {
+  console.log("Cookies received:", req.cookies);
   const token = req.cookies.access_token;
   if (!token) {
     return next(handleError(401, "Unauthorized"));
