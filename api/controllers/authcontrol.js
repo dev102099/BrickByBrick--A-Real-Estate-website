@@ -45,7 +45,11 @@ const google = async (req, res, next) => {
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_ACCESS_TOKEN);
       const { password, ...rest } = newUser._doc;
       res
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, {
+          httpOnly: true,
+          secure: true, // Only set cookies on HTTPS (Required on Render)
+          sameSite: "none",
+        })
         .status(200)
         .json(rest);
     }
@@ -68,7 +72,11 @@ const signin = async (req, res, next) => {
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_ACCESS_TOKEN);
     const { password: notNeeded, ...restData } = validUser._doc;
     res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, {
+        httpOnly: true,
+        secure: true, // Only set cookies on HTTPS (Required on Render)
+        sameSite: "none",
+      })
       .status(200)
       .json(restData);
   } catch (error) {
