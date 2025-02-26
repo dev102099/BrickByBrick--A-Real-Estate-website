@@ -7,7 +7,8 @@ export default function SignUp() {
   let [loading, setLoad] = useState(false);
   let [Error, setError] = useState(null);
   const navigate = useNavigate();
-
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const handleData = (e) => {
     setformData((formData = { ...formData, [e.target.id]: e.target.value }));
   };
@@ -19,7 +20,7 @@ export default function SignUp() {
       if (formData == {}) {
         alert("Form is empty");
       }
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

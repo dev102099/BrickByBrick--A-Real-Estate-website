@@ -16,6 +16,8 @@ import Contact from "../components/Contact";
 import Spinner from "../components/Spinner";
 function Listing() {
   SwiperCore.use([Navigation]);
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const [listings, setListings] = useState({ images: [] });
@@ -27,7 +29,9 @@ function Listing() {
     const fetchListings = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/listing/getListing/${params.listingId}`);
+        const res = await fetch(
+          `${API_BASE_URL}/api/listing/getListing/${params.listingId}`
+        );
         const data = await res.json();
         if (data.success === false) {
           setError(true);

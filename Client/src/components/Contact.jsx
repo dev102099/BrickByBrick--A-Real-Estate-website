@@ -4,11 +4,13 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const [message, setMessage] = useState(null);
   useEffect(() => {
     const getLandLord = async () => {
       try {
-        const res = await fetch(`/api/users/${listing.userRef}`);
+        const res = await fetch(`${API_BASE_URL}/api/users/${listing.userRef}`);
 
         const data = await res.json();
         if (data.success === false) {

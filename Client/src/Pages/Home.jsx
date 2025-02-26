@@ -8,6 +8,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 
 function Home() {
   SwiperCore.use([Navigation]);
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const [offerListing, setOfferListing] = useState();
   const [sellListing, setSellListing] = useState();
   const [rentListing, setRentListing] = useState();
@@ -24,7 +26,7 @@ function Home() {
     const offerFetch = async () => {
       try {
         const res = await fetch(
-          "/api/listing/get?offer=true&limit=4&sort=createdAt"
+          `${API_BASE_URL}/api/listing/get?offer=true&limit=4&sort=createdAt`
         );
         const data = await res.json();
         setOfferListing(data);
@@ -37,7 +39,7 @@ function Home() {
     const sellFetch = async () => {
       try {
         const res = await fetch(
-          "/api/listing/get?type=sell&limit=4&sort=createdAt"
+          `${API_BASE_URL}/api/listing/get?type=sell&limit=4&sort=createdAt`
         );
         const data = await res.json();
         setSellListing(data);
@@ -50,7 +52,7 @@ function Home() {
     const rentFetch = async () => {
       try {
         const res = await fetch(
-          "/api/listing/get?type=rent&limit=4&sort=createdAt"
+          `${API_BASE_URL}/api/listing/get?type=rent&limit=4&sort=createdAt`
         );
         const data = await res.json();
         setRentListing(data);

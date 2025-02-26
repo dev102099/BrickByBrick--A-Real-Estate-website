@@ -16,6 +16,8 @@ import {
 import { useState } from "react";
 
 export default function Profile() {
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const fileRef = useRef(null);
   const [bool, setBool] = useState(false);
   const { loading, error } = useSelector((state) => state.user);
@@ -91,9 +93,12 @@ export default function Profile() {
   const handleDelete = async () => {
     try {
       dispatch(onDeleteStart());
-      const res = await fetch(`api/users/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${API_BASE_URL}/api/users/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         dispatch(onDeleteFail(data.message));
@@ -107,7 +112,7 @@ export default function Profile() {
   const handleSignout = async () => {
     try {
       dispatch(onSignoutStart());
-      const res = await fetch("/api/auth/signout");
+      const res = await fetch(`${API_BASE_URL}/api/auth/signout`);
       const data = await res.json();
       if (data.success == false) {
         dispatch(onSignoutFail(data.message));
@@ -121,7 +126,9 @@ export default function Profile() {
 
   const handleListing = async () => {
     try {
-      const res = await fetch(`api/users/listing/${currentUser._id}`);
+      const res = await fetch(
+        `${API_BASE_URL}/api/users/listing/${currentUser._id}`
+      );
       const data = await res.json();
       if (data.success === false) {
         setErrorListings(true);
@@ -139,9 +146,12 @@ export default function Profile() {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${API_BASE_URL}/api/listing/delete/${listingId}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);

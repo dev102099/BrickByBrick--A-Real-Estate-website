@@ -4,6 +4,8 @@ import Spinner from "../components/Spinner";
 import ListingCard from "../components/ListingCard";
 
 function Search() {
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const [searchbardata, setSearchbardata] = useState({
     searchTerm: "",
     type: "all",
@@ -50,7 +52,7 @@ function Search() {
     const fetchListings = async () => {
       const queryUrl = url.toString();
       setLoading(true);
-      const res = await fetch(`/api/listing/get?${queryUrl}`);
+      const res = await fetch(`${API_BASE_URL}/api/listing/get?${queryUrl}`);
       const data = await res.json();
       if (data.length === 0) {
         setNoListing(true);
@@ -119,7 +121,7 @@ function Search() {
     const url = new URLSearchParams(location.search);
     url.set("startIndex", startIndex);
     const Query = url.toString();
-    const res = await fetch(`/api/listing/get?${Query}`);
+    const res = await fetch(`${API_BASE_URL}/api/listing/get?${Query}`);
     const data = await res.json();
     if (data.length < 9) {
       setshowMore(false);

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function CreateListing() {
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const navigate = useNavigate();
   const [formData, setformData] = useState({
     images: [],
@@ -123,7 +125,7 @@ function CreateListing() {
         return;
       }
       setLoading(true);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch(`${API_BASE_URL}/api/listing/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

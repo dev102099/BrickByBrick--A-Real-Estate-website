@@ -10,6 +10,8 @@ import {
 import OAuth from "../components/oAuth";
 
 export default function SignIn() {
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   let [formData, setformData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ export default function SignIn() {
 
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

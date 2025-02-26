@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 function UpdateListing() {
   const navigate = useNavigate();
   const params = useParams();
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
   const [formData, setformData] = useState({
     images: [],
     name: "",
@@ -24,7 +26,9 @@ function UpdateListing() {
     const dataFetch = async () => {
       try {
         const lId = params.listingId;
-        const res = await fetch(`/api/listing/getListing/${lId}`);
+        const res = await fetch(
+          `${API_BASE_URL}/api/listing/getListing/${lId}`
+        );
         const data = await res.json();
         if (data.success === false) {
           console.log(data.message);
@@ -145,13 +149,16 @@ function UpdateListing() {
         return;
       }
       setLoading(true);
-      const res = await fetch(`/api/listing/update/${params.listingId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, userRef: currentUser._id }),
-      });
+      const res = await fetch(
+        `${API_BASE_URL}/api/listing/update/${params.listingId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...formData, userRef: currentUser._id }),
+        }
+      );
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
