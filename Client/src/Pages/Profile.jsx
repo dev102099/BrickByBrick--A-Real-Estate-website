@@ -74,7 +74,7 @@ export default function Profile() {
       const res = await fetch(
         `${API_BASE_URL}/api/users/update/${currentUser._id}`,
         {
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },

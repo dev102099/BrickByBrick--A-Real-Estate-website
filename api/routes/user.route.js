@@ -10,7 +10,7 @@ const {
 } = require("../controllers/usercontrol");
 //const deleteUser = require("../controllers/usercontrol");
 
-router.put("/update/:id", verifyCookie, updateUser);
+router.post("/update/:id", verifyCookie, updateUser);
 router.delete("/delete/:id", verifyCookie, deleteUser);
 router.get("/listing/:id", verifyCookie, getUserListing);
 router.get("/:id", verifyCookie, getUser);
