@@ -14,7 +14,6 @@ const app = express();
 app.use(
   cors({
     origin: "https://brickbybrick-a-real-estate-website-1.onrender.com", // Frontend URL
-    credentials: true,
   })
 );
 
