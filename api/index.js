@@ -19,6 +19,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(process.env.MONGO, { autoIndex: true })
@@ -30,10 +31,6 @@ mongoose
   });
 
 const PORT = process.env.PORT || 3000;
-
-app.listen(3000, () => {
-  console.log(`Listening on ${PORT}`);
-});
 
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
@@ -47,4 +44,7 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+app.listen(3000, () => {
+  console.log(`Listening on ${PORT}`);
 });
