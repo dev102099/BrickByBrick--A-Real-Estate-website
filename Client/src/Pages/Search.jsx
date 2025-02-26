@@ -67,7 +67,7 @@ function Search() {
         setshowMore(false);
       }
       setListings(data);
-      console.log(data);
+
       setLoading(false);
     };
     fetchListings();
