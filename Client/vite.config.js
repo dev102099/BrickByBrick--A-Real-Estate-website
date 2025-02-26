@@ -4,13 +4,13 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vite.dev/config/
 export default defineConfig({
-  server: {
+  /*server: {
     proxy: {
       "/api": {
         target: "http://localhost:3000", // Your backend server
         changeOrigin: true,
       },
     },
-  },
+  },*/
   plugins: [react(), tailwindcss()],
 });
